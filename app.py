@@ -14,7 +14,7 @@ st.set_page_config(page_title="Circular Economy AI", layout="centered")
 st.title("♻️ Circular Economy Multi-Agent AI")
 st.caption("Swachh Bharat • Sustainability • Open Innovation")
 
----------------- AGENT 1: DETECTION ----------------
+# ---------------- AGENT 1: DETECTION ----------------
 def detection_agent(image):
     prompt = """
     Detect the main item in the image.
@@ -29,7 +29,7 @@ def detection_agent(image):
     response = vision_model.generate_content([prompt, image])
     return response.text
 
----------------- AGENT 2: SORTING ----------------
+# ---------------- AGENT 2: SORTING ----------------
 def sorting_agent(detection_output):
     prompt = f"""
     You are a circular economy sorting agent.
@@ -328,6 +328,7 @@ if st.session_state.result:
 
     with col3:
         st.button("♻️ Recycle Nearby")
+
 
 
 
