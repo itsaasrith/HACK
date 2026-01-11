@@ -3,7 +3,7 @@ import google.generativeai as genai
 from PIL import Image
 
 # ---------------- CONFIG ----------------
-genai.configure(api_key=["GEMINI_API_KEY"])
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
 
 vision_model = genai.GenerativeModel("gemini-2.5-flash")
@@ -328,6 +328,7 @@ if st.session_state.result:
 
     with col3:
         st.button("♻️ Recycle Nearby")
+
 
 
 
