@@ -1,41 +1,55 @@
 import streamlit as st
 import google.generativeai as genai
 from PIL import Image
-import json
-import re
+import json, re
+from datetime import datetime
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
 
+from auth.auth_manager import register_user, login_user
+from storage.db import add_entry, fetch_user_entries, fetch_all_users
 
-# ================= SAFE JSON PARSER =================
-def safe_json_loads(text):
+# ================= CONFIG =================
+st.set_page_config(page_title="Circular Economy AI", page_icon="♻️", layout="centered")
+
+genai.configure(api_key="AIzaSyDn3diBfZtHv7X21adqmBRRnW4xHSAms48")
+vision_model = genai.GenerativeModel("gemini-2.5-flash")
+text_model = genai.GenerativeModel("gemini-2.5-flash")
+
+# ================= SESSION =================
+if "user" not in st.session_state:
+    st.session_state.user = None
+
+# ================= UI =================
+st.title("♻️ Circular Economy Multi-Agent AI")
+st.caption("Swachh Bharat • Sustainability • Government Incentives")
+
+st.markdown("""
+<style>
+.card {
+    padding: 1.2rem;
+    border-radius: 12px;
+    background-color: #0e1117;
+    border: 1px solid #262730;
+    margin-bottom: 1rem;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ================= HELPERS =================
+def safe_json(text):
     try:
         text = re.sub(r"```json|```", "", text).strip()
         return json.loads(text)
     except:
         return None
 
-# ================= CONFIG =================
-genai.configure(api_key="AIzaSyD2Tp1eB1MUmokyIgRE2hP0vf6lLkL6Lo4")
-
-vision_model = genai.GenerativeModel("gemini-2.5-flash")
-text_model = genai.GenerativeModel("gemini-2.5-flash")
-
-st.set_page_config(page_title="Circular Economy AI", layout="centered")
-
-st.title("♻️ Circular Economy Multi-Agent AI")
-st.caption("Swachh Bharat • Sustainability • Open Innovation")
-
-# ================= AGENT 1: MULTI-ITEM DETECTION =================
-def detection_agent(image):
+# ================= AGENT A: DETECTION (IMAGE OR TEXT) =================
+def agent_a_detection(image=None, text=None):
     prompt = """
-    Analyze the image carefully.
+    Detect ALL usable or discardable items.
 
-    Detect ALL distinct usable or discardable items.
-    Ignore background objects.
-
-    Respond ONLY with VALID JSON.
-    Do NOT include markdown or explanations.
-
-    STRICT FORMAT:
+    Return ONLY JSON:
     {
       "items": [
         {
@@ -47,160 +61,199 @@ def detection_agent(image):
       ]
     }
     """
-    response = vision_model.generate_content([prompt, image])
-    return response.text.strip()
+    if image:
+        return vision_model.generate_content([prompt, image]).text
+    else:
+        return text_model.generate_content(f"{prompt}\nText:\n{text}").text
 
-# ================= AGENT 2: SORTING =================
-def sorting_agent(item):
+# ================= AGENT B: SUSTAINABILITY DECISION =================
+def agent_b_decision(item):
     prompt = f"""
-    You are a circular economy sorting agent.
-
     Item:
     {item}
 
-    Return ONLY JSON with:
-    - category
-    - sustainability_type (recyclable / reusable / upcyclable / e-waste / biodegradable)
-    - estimated_weight_kg
-    - carbon_category (low / medium / high)
-    """
-    response = text_model.generate_content(prompt)
-    return response.text.strip()
+    Perform ALL of the following:
+    - Categorize item
+    - Decide sustainability type
+    - Choose best sustainable action
+    - Estimate resale value
+    - Estimate CO₂ saved
+    - Give sustainability score
 
-# ================= AGENT 3: USAGE + CO₂ =================
-def usage_agent(sorted_item):
+    Return ONLY JSON:
+    {{
+      "category": "string",
+      "sustainability_type": "recyclable | reusable | upcyclable | e-waste | biodegradable",
+      "best_sustainable_action": "reuse | upcycle | recycle | resell | donate",
+      "estimated_resale_value_in_inr": number,
+      "estimated_co2_saved_kg": number,
+      "sustainability_score_out_of_100": number
+    }}
+    """
+    return text_model.generate_content(prompt).text
+
+# ================= AGENT C: GOVERNMENT + DIY =================
+def agent_c_government_diy(item, decision):
     prompt = f"""
-    You are a sustainability and carbon-impact decision agent.
+    Item:
+    {item}
 
-    Input:
-    {sorted_item}
+    Sustainability decision:
+    {decision}
 
-    Return ONLY JSON with:
-    - best_sustainable_action
-    - two_reuse_or_upcycle_ideas
-    - estimated_resale_value_in_inr
-    - potential_buyers
-    - estimated_co2_emission_if_disposed_kg
-    - estimated_co2_saved_by_sustainable_action_kg
-    - sustainability_score_out_of_100
+    Government policy:
+    1 kg CO₂ saved = 10 Green Points
 
-    Use realistic approximate values.
+    Suggest DIY or practical actions based on preferred action.
+
+    Return ONLY JSON:
+    {{
+      "government_green_points": number,
+      "recommended_action_type": "DIY | household | community",
+      "step_by_step_actions": ["step 1", "step 2", "step 3"],
+      "tools_required": ["tool1", "tool2"],
+      "estimated_time_minutes": number
+    }}
     """
-    response = text_model.generate_content(prompt)
-    return response.text.strip()
+    return text_model.generate_content(prompt).text
 
-# ================= GOVERNMENT CREDIT LOGIC =================
-def calculate_green_credits(co2_saved):
-    # 1 kg CO₂ saved = 10 credits
-    credits = int(co2_saved * 10)
-    cash_reward = credits * 2  # ₹2 per credit (mock)
-    return credits, cash_reward
+# ================= CERTIFICATE =================
+def generate_certificate(username, points, co2):
+    filename = f"{username}_certificate.pdf"
+    c = canvas.Canvas(filename, pagesize=A4)
+    w, h = A4
 
-# ================= SESSION STATE =================
-if "results" not in st.session_state:
-    st.session_state.results = None
+    c.setFont("Helvetica-Bold", 22)
+    c.drawCentredString(w/2, h-150, "Government Sustainability Certificate")
 
-# ================= UI =================
-uploaded_file = st.file_uploader(
-    "📸 Upload an image with multiple used/waste items",
-    type=["jpg", "jpeg", "png"]
+    c.setFont("Helvetica", 14)
+    c.drawCentredString(w/2, h-230, "This certifies that")
+
+    c.setFont("Helvetica-Bold", 18)
+    c.drawCentredString(w/2, h-270, username)
+
+    c.drawCentredString(w/2, h-330, f"has reduced {round(co2,2)} kg of CO₂ emissions")
+    c.drawCentredString(w/2, h-370, f"and earned {points} Green Points")
+
+    c.drawCentredString(
+        w/2, h-440,
+        f"Issued on {datetime.now().strftime('%d %B %Y')}"
+    )
+
+    c.showPage()
+    c.save()
+    return filename
+
+# ================= AUTH =================
+if st.session_state.user is None:
+    tab1, tab2 = st.tabs(["🔐 Login", "📝 Register"])
+
+    with tab1:
+        u = st.text_input("Username")
+        p = st.text_input("Password", type="password")
+        if st.button("Login"):
+            if login_user(u, p):
+                st.session_state.user = u
+                st.rerun()
+            else:
+                st.error("Invalid credentials")
+
+    with tab2:
+        u = st.text_input("New Username")
+        p = st.text_input("New Password", type="password")
+        if st.button("Register"):
+            if register_user(u, p):
+                st.success("Registered! Login now.")
+            else:
+                st.error("User already exists")
+
+    st.stop()
+
+# ================= MAIN =================
+st.success(f"Welcome, {st.session_state.user}")
+
+tab_input, tab_results, tab_dashboard, tab_leaderboard = st.tabs(
+    ["📥 Input", "📊 Results", "🌱 Dashboard", "🏆 Leaderboard"]
 )
 
-if uploaded_file:
-    image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image", use_column_width=True)
+# ================= INPUT =================
+with tab_input:
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    mode = st.radio("Input type", ["Upload Image", "Enter Text"], horizontal=True)
 
-    if st.button("🚀 Analyze Sustainably"):
-        with st.spinner("Running autonomous agents..."):
+    uploaded_file, text_input = None, None
+    if mode == "Upload Image":
+        uploaded_file = st.file_uploader("Upload image", ["jpg","png","jpeg"])
+    else:
+        text_input = st.text_area("Describe items", height=120)
 
-            detection_text = detection_agent(image)
-            detection_data = safe_json_loads(detection_text)
+    analyze = st.button("🚀 Run 3-Agent Analysis")
+    st.markdown('</div>', unsafe_allow_html=True)
 
-            if not detection_data or "items" not in detection_data:
-                st.error("❌ Detection failed. Please try a clearer image.")
-                st.stop()
+# ================= PIPELINE =================
+results = []
 
-            all_items = detection_data["items"]
+if analyze and (uploaded_file or text_input):
+    with st.spinner("Running optimized agents..."):
 
-            # ===== SELECT ONLY TOP 2 ITEMS (QUOTA SAFE) =====
-            MAX_ITEMS = 2
-            selected_items = sorted(
-                all_items,
-                key=lambda x: x.get("quantity", 1),
-                reverse=True
-            )[:MAX_ITEMS]
+        detected = safe_json(
+            agent_a_detection(
+                image=Image.open(uploaded_file) if uploaded_file else None,
+                text=text_input
+            )
+        )
 
-            remaining_items = all_items[MAX_ITEMS:]
+        for item in detected["items"][:2]:
+            decision = safe_json(agent_b_decision(item))
+            gov_diy = safe_json(agent_c_government_diy(item, decision))
 
-            results = []
-
-            for item in selected_items:
-                sorting = sorting_agent(item)
-                usage = usage_agent(sorting)
-
-                results.append({
-                    "item": item,
-                    "sorting": sorting,
-                    "usage": usage
-                })
-
-            st.session_state.results = {
-                "processed": results,
-                "skipped": remaining_items
+            entry = {
+                "item": item,
+                "decision": decision,
+                "government_diy": gov_diy,
+                "co2_saved_kg": decision["estimated_co2_saved_kg"],
+                "government_points": gov_diy["government_green_points"],
+                "time": datetime.now().isoformat()
             }
 
+            add_entry(st.session_state.user, entry)
+            results.append(entry)
+
 # ================= RESULTS =================
-if st.session_state.results:
-
-    total_credits = 0
-    total_cash = 0
-
-    # ===== PROCESSED ITEMS =====
-    for idx, result in enumerate(st.session_state.results["processed"]):
-        st.subheader(f"📦 Processed Item {idx + 1}")
-
-        st.json(result["item"])
-        st.code(result["sorting"], language="json")
-        st.code(result["usage"], language="json")
-
-        try:
-            usage_data = json.loads(result["usage"])
-            co2_saved = float(
-                usage_data.get("estimated_co2_saved_by_sustainable_action_kg", 0)
+with tab_results:
+    if results:
+        for r in results:
+            st.json(r)
+            st.success(
+                f"🌍 CO₂ Saved: {r['co2_saved_kg']} kg | 🏛️ Points: {r['government_points']}"
             )
-            credits, cash = calculate_green_credits(co2_saved)
-            total_credits += credits
-            total_cash += cash
-        except:
-            pass
+    else:
+        st.info("No analysis yet.")
 
-    # ===== SKIPPED ITEMS =====
-    if st.session_state.results["skipped"]:
-        st.subheader("📦 Other Detected Items (Skipped for Cost Optimization)")
-        for item in st.session_state.results["skipped"]:
-            st.json({
-                "item_name": item["item_name"],
-                "quantity": item["quantity"],
-                "note": "Detected but not deeply analyzed to optimize API usage"
-            })
+# ================= DASHBOARD =================
+with tab_dashboard:
+    entries = fetch_user_entries(st.session_state.user)
+    total_co2 = sum(e["co2_saved_kg"] for e in entries)
+    total_points = sum(e["government_points"] for e in entries)
 
-    # ===== GOVERNMENT REWARDS =====
-    st.subheader("🏛️ Government Sustainability Rewards")
-    st.success(f"""
-    🌱 Total Green Credits Earned: **{total_credits}**
-    💰 Estimated Cash Incentive: **₹{total_cash}**
-    """)
-    st.caption("✔ Logged to Government Sustainability Cloud (Simulated)")
+    st.metric("🌍 Total CO₂ Reduced (kg)", round(total_co2,2))
+    st.metric("🏛️ Government Green Points", total_points)
 
-    # ===== MARKETPLACE =====
-    st.subheader("💰 Marketplace Actions")
-    col1, col2, col3 = st.columns(3)
+    if st.button("📄 Download Certificate"):
+        pdf = generate_certificate(st.session_state.user, total_points, total_co2)
+        with open(pdf, "rb") as f:
+            st.download_button("Download Certificate", f, file_name=pdf)
 
-    with col1:
-        st.button("🛒 Sell Item")
+# ================= LEADERBOARD =================
+with tab_leaderboard:
+    leaderboard = []
+    for u in fetch_all_users():
+        e = fetch_user_entries(u)
+        leaderboard.append({
+            "User": u,
+            "CO₂ Saved (kg)": round(sum(x["co2_saved_kg"] for x in e),2),
+            "Green Points": sum(x["government_points"] for x in e)
+        })
 
-    with col2:
-        st.button("🤝 Donate")
-
-    with col3:
-        st.button("♻️ Recycle Nearby")
+    leaderboard = sorted(leaderboard, key=lambda x: x["Green Points"], reverse=True)
+    st.table(leaderboard)
