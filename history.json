@@ -1,0 +1,380 @@
+{
+  "nees": [
+    {
+      "item": {
+        "item_name": "rose",
+        "primary_material": "plant matter",
+        "condition": "new",
+        "quantity": 5
+      },
+      "decision": {
+        "category": "Plant",
+        "sustainability_type": "biodegradable",
+        "best_sustainable_action": "resell",
+        "estimated_resale_value_in_inr": 300,
+        "estimated_co2_saved_kg": 5,
+        "sustainability_score_out_of_100": 75
+      },
+      "government_diy": {
+        "government_green_points": 50,
+        "recommended_action_type": "household",
+        "step_by_step_actions": [
+          "Carefully inspect the roses. For cut roses, ensure they are fresh, trim stems at an angle, and place them immediately in clean water. For potted roses, ensure they are well-watered and healthy.",
+          "Take high-quality, appealing photographs of the roses from various angles to showcase their beauty and condition.",
+          "Determine a competitive selling price, considering the estimated resale value of \u20b9300 for the 5 roses.",
+          "List the roses for sale on popular local online marketplaces (e.g., Facebook Marketplace, OLX) or community groups. Include clear descriptions of the item, its 'new' condition, price, and preferred pick-up or delivery arrangements.",
+          "Respond promptly to inquiries from potential buyers and arrange a convenient time and location for item inspection and transaction.",
+          "Once sold, carefully package (if necessary) and transfer the roses to the buyer, ensuring they remain in good condition."
+        ],
+        "tools_required": [
+          "Smartphone with camera",
+          "Internet access",
+          "Vase/water (for cut roses)",
+          "Small pruning shears or sharp knife (for trimming cut rose stems)",
+          "Gardening gloves (optional, for handling thorny roses)"
+        ],
+        "estimated_time_minutes": 60
+      },
+      "co2_saved_kg": 5,
+      "government_points": 50,
+      "time": "2026-01-11T10:31:25.911841"
+    },
+    {
+      "item": {
+        "item_name": "leaf",
+        "primary_material": "plant matter",
+        "condition": "new",
+        "quantity": 15
+      },
+      "decision": {
+        "category": "Natural material",
+        "sustainability_type": "biodegradable",
+        "best_sustainable_action": "recycle",
+        "estimated_resale_value_in_inr": 0,
+        "estimated_co2_saved_kg": 0.001,
+        "sustainability_score_out_of_100": 90
+      },
+      "government_diy": {
+        "government_green_points": 0.01,
+        "recommended_action_type": "household",
+        "step_by_step_actions": [
+          "Collect fallen leaves from your garden or yard using a rake or leaf blower.",
+          "If leaves are large, shred them using a lawnmower or leaf shredder to speed up decomposition.",
+          "Add the shredded or whole leaves to a designated compost bin or pile.",
+          "Mix the leaves with other 'green' materials (like kitchen scraps or grass clippings) to balance carbon and nitrogen.",
+          "Ensure the compost pile remains moist, similar to a wrung-out sponge, by adding water if necessary.",
+          "Turn the compost pile with a pitchfork or shovel every 1-2 weeks to aerate it and facilitate decomposition.",
+          "Once the leaves have fully broken down into dark, crumbly material, use the rich compost to nourish your garden soil or potting mixes."
+        ],
+        "tools_required": [
+          "Rake or leaf blower",
+          "Compost bin or designated compost area",
+          "Optional: Leaf shredder or lawnmower",
+          "Pitchfork or shovel",
+          "Watering can or hose"
+        ],
+        "estimated_time_minutes": 45
+      },
+      "co2_saved_kg": 0.001,
+      "government_points": 0.01,
+      "time": "2026-01-11T10:31:43.874729"
+    },
+    {
+      "item": {
+        "item_name": "Floral Crown",
+        "primary_material": "Plant matter",
+        "condition": "new",
+        "quantity": 1
+      },
+      "decision": {
+        "category": "Accessory",
+        "sustainability_type": "biodegradable",
+        "best_sustainable_action": "reuse",
+        "estimated_resale_value_in_inr": 300,
+        "estimated_co2_saved_kg": 0.8,
+        "sustainability_score_out_of_100": 80
+      },
+      "government_diy": {
+        "government_green_points": 8,
+        "recommended_action_type": "DIY",
+        "step_by_step_actions": [
+          "Gently hang the floral crown upside down in a cool, dark, and well-ventilated area to air dry completely (this may take 1-3 weeks, depending on the plant material).",
+          "Once fully dried, lightly spray the entire crown with a clear matte or satin sealant spray to preserve its color and help prevent crumbling. Allow it to dry thoroughly.",
+          "Repurpose the preserved crown as a decorative item by hanging it on a wall, using it as a unique centerpiece, or adorning a mirror. Alternatively, carefully dismantle the dried elements for smaller craft projects like making potpourri, decorating greeting cards, or creating resin art."
+        ],
+        "tools_required": [
+          "String or ribbon",
+          "Clear sealant spray (e.g., craft sealant or floral preservative)",
+          "Scissors (optional, for dismantling)",
+          "Gloves (recommended when using sealant spray)"
+        ],
+        "estimated_time_minutes": 25
+      },
+      "co2_saved_kg": 0.8,
+      "government_points": 8,
+      "time": "2026-01-11T10:33:31.504401"
+    },
+    {
+      "item": {
+        "item_name": "Rose",
+        "primary_material": "Plant matter",
+        "condition": "new",
+        "quantity": 5
+      },
+      "decision": {
+        "category": "Flowers",
+        "sustainability_type": "biodegradable",
+        "best_sustainable_action": "compost",
+        "estimated_resale_value_in_inr": 0,
+        "estimated_co2_saved_kg": 0.01,
+        "sustainability_score_out_of_100": 75
+      },
+      "government_diy": {
+        "government_green_points": 0.5,
+        "recommended_action_type": "DIY",
+        "step_by_step_actions": [
+          "Prepare the roses: Remove any non-biodegradable parts like ribbons or plastic wrap. For faster decomposition, cut the rose stems and flower heads into smaller pieces (2-3 inch sections) using garden shears or scissors.",
+          "Choose a composting method: You can add them to an existing compost pile, a dedicated compost bin, or a vermicomposting (worm composting) system.",
+          "Integrate into compost: If using a pile or bin, bury the rose pieces within the existing compost material to help them break down faster and prevent pests. Ensure a good mix with 'brown' materials (like dry leaves, shredded paper) to balance the 'green' (nitrogen-rich) roses.",
+          "Maintain the compost: Regularly turn your compost pile to aerate it and ensure even decomposition. Keep the compost moist, like a wrung-out sponge, but not waterlogged."
+        ],
+        "tools_required": [
+          "Garden shears or scissors",
+          "Compost bin or designated compost area",
+          "Pitchfork or shovel (for turning compost)",
+          "Watering can (optional, for moisture)"
+        ],
+        "estimated_time_minutes": 15
+      },
+      "co2_saved_kg": 0.01,
+      "government_points": 0.5,
+      "time": "2026-01-11T10:33:50.091225"
+    }
+  ],
+  "helloworld": [
+    {
+      "item": {
+        "item_name": "rose flower",
+        "primary_material": "plant matter",
+        "condition": "new",
+        "quantity": 4
+      },
+      "decision": {
+        "category": "decoration",
+        "sustainability_type": "biodegradable",
+        "best_sustainable_action": "upcycle",
+        "estimated_resale_value_in_inr": 200,
+        "estimated_co2_saved_kg": 0.05,
+        "sustainability_score_out_of_100": 75
+      },
+      "government_diy": {
+        "government_green_points": 0.5,
+        "recommended_action_type": "DIY",
+        "step_by_step_actions": [
+          "Carefully separate the petals from the rose flowers, discarding any damaged or discolored ones.",
+          "Spread the fresh rose petals on a clean, dry surface like a baking sheet or a mesh screen.",
+          "Place the petals in a well-ventilated area, away from direct sunlight, for several days until they are completely dry and crisp.",
+          "Once dried, you can use the petals to make homemade potpourri by adding essential oils, or incorporate them into crafts like candles, soaps, or decorative sachets."
+        ],
+        "tools_required": [
+          "Scissors (optional, for trimming)",
+          "Baking sheet or mesh screen",
+          "Airtight containers (for storing dried petals/potpourri)"
+        ],
+        "estimated_time_minutes": 20
+      },
+      "co2_saved_kg": 0.05,
+      "government_points": 0.5,
+      "time": "2026-01-11T10:45:35.842408"
+    },
+    {
+      "item": {
+        "item_name": "leaf",
+        "primary_material": "plant matter",
+        "condition": "new",
+        "quantity": 8
+      },
+      "decision": {
+        "category": "Organic/Natural Materials",
+        "sustainability_type": "biodegradable",
+        "best_sustainable_action": "recycle",
+        "estimated_resale_value_in_inr": 0,
+        "estimated_co2_saved_kg": 0.005,
+        "sustainability_score_out_of_100": 95
+      },
+      "government_diy": {
+        "government_green_points": 0.05,
+        "recommended_action_type": "household",
+        "step_by_step_actions": [
+          "Gather the leaves: Collect the 8 leaves (and any other dry leaves or plant matter you have available).",
+          "Prepare your compost space: Add the leaves to an existing compost pile or bin. If you don't have one, start a small compost area in your garden or a dedicated container.",
+          "Layer with green materials: Mix the leaves (brown material) with a small amount of 'green' waste such as fresh kitchen scraps (fruit/vegetable peels) or grass clippings to help with decomposition.",
+          "Moisten the mixture: Lightly spray or sprinkle water on the compost materials until they are damp, like a wrung-out sponge, but not waterlogged.",
+          "Turn occasionally: Every few weeks, use a shovel or trowel to turn and mix the compost pile. This aerates the materials and speeds up the decomposition process, creating nutrient-rich compost."
+        ],
+        "tools_required": [
+          "Compost bin or designated compost area",
+          "Garden trowel or small shovel",
+          "Watering can or hose"
+        ],
+        "estimated_time_minutes": 15
+      },
+      "co2_saved_kg": 0.005,
+      "government_points": 0.05,
+      "time": "2026-01-11T10:45:53.739576"
+    }
+  ],
+  "HACK'26": [
+    {
+      "item": {
+        "item_name": "Rose flower",
+        "primary_material": "Organic matter",
+        "condition": "new",
+        "quantity": 4
+      },
+      "decision": {
+        "category": "Plants & Flowers",
+        "sustainability_type": "biodegradable",
+        "best_sustainable_action": "donate",
+        "estimated_resale_value_in_inr": 200,
+        "estimated_co2_saved_kg": 0.2,
+        "sustainability_score_out_of_100": 75
+      },
+      "government_diy": {
+        "government_green_points": 2,
+        "recommended_action_type": "community",
+        "step_by_step_actions": [
+          "Identify local organizations such as nursing homes, hospitals, community centers, or schools that may appreciate fresh flower donations.",
+          "Contact your chosen organization to confirm their acceptance policy, preferred delivery method, and a convenient time for drop-off.",
+          "Prepare the rose flowers by trimming the stems, removing any wilting leaves, and placing them in water to maintain freshness until donation.",
+          "Arrange for delivery or drop-off of the flowers to the organization at the agreed-upon time, ensuring they remain in good condition."
+        ],
+        "tools_required": [
+          "Vase or bucket",
+          "Water",
+          "Floral scissors or sharp knife",
+          "Phone or computer (for contacting organizations)"
+        ],
+        "estimated_time_minutes": 60
+      },
+      "co2_saved_kg": 0.2,
+      "government_points": 2,
+      "time": "2026-01-11T10:52:23.644974"
+    },
+    {
+      "item": {
+        "item_name": "Rose leaf",
+        "primary_material": "Organic matter",
+        "condition": "new",
+        "quantity": 12
+      },
+      "decision": {
+        "category": "Plant Material",
+        "sustainability_type": "biodegradable",
+        "best_sustainable_action": "reuse",
+        "estimated_resale_value_in_inr": 0,
+        "estimated_co2_saved_kg": 0.001,
+        "sustainability_score_out_of_100": 90
+      },
+      "government_diy": {
+        "government_green_points": 0.01,
+        "recommended_action_type": "DIY",
+        "step_by_step_actions": [
+          "Spread the 12 rose leaves on a clean, dry surface or wire rack and allow them to air dry completely until crisp (this may take 3-7 days, passive time).",
+          "Once dry, gently crumble the leaves into a small bowl.",
+          "Add 3-5 drops of your favorite essential oil (e.g., rose, lavender, sandalwood) to the crumbled leaves and mix well.",
+          "Transfer the fragrant mixture into a small sachet bag, a breathable fabric pouch, or a decorative small dish to act as a natural air freshener."
+        ],
+        "tools_required": [
+          "Small bowl",
+          "Essential oil (e.g., rose, lavender)",
+          "Sachet bag or small decorative dish",
+          "Wire rack (optional, for drying)"
+        ],
+        "estimated_time_minutes": 10
+      },
+      "co2_saved_kg": 0.001,
+      "government_points": 0.01,
+      "time": "2026-01-11T10:52:46.851401"
+    }
+  ],
+  "vennela": [
+    {
+      "item": {
+        "item_name": "Pen",
+        "primary_material": "Plastic",
+        "condition": "used",
+        "quantity": 1
+      },
+      "decision": {
+        "category": "Stationery",
+        "sustainability_type": "upcyclable",
+        "best_sustainable_action": "upcycle",
+        "estimated_resale_value_in_inr": 0,
+        "estimated_co2_saved_kg": 0.015,
+        "sustainability_score_out_of_100": 40
+      },
+      "government_diy": {
+        "government_green_points": 0.15,
+        "recommended_action_type": "DIY",
+        "step_by_step_actions": [
+          "Disassemble the pen, separating the plastic body from the ink tube, spring, and tip. Ensure the ink tube is empty or dispose of it responsibly if it still contains ink.",
+          "Thoroughly clean the plastic pen body and cap (if applicable) with soap and water to remove any ink residue or dirt.",
+          "Decide on an upcycling project: you could create beads, small decorative pieces, a miniature tool handle, or even part of a small art sculpture.",
+          "For beads/decorative pieces: Carefully cut the plastic body into desired shapes or segments using a craft knife or strong scissors. You can use sandpaper or a nail file to smooth any rough edges.",
+          "For a miniature tool handle: If the plastic body is sturdy, clean it and consider how a small bit (e.g., tiny screwdriver bit) could be attached securely (e.g., with strong adhesive or by gently heating and molding).",
+          "Decorate your upcycled plastic pieces with acrylic paint, permanent markers, or glitter if desired, then let them dry completely before use."
+        ],
+        "tools_required": [
+          "Soap and water",
+          "Craft knife or strong scissors",
+          "Sandpaper or nail file (optional)",
+          "Strong adhesive (optional)",
+          "Acrylic paints or permanent markers (optional)"
+        ],
+        "estimated_time_minutes": 25
+      },
+      "co2_saved_kg": 0.015,
+      "government_points": 0.15,
+      "time": "2026-01-11T09:42:04.272429"
+    },
+    {
+      "item": {
+        "item_name": "Earbud charging case",
+        "primary_material": "Plastic",
+        "condition": "used",
+        "quantity": 1
+      },
+      "decision": {
+        "category": "Electronics Accessory",
+        "sustainability_type": "e-waste",
+        "best_sustainable_action": "resell",
+        "estimated_resale_value_in_inr": 450,
+        "estimated_co2_saved_kg": 2.5,
+        "sustainability_score_out_of_100": 70
+      },
+      "government_diy": {
+        "government_green_points": 25,
+        "recommended_action_type": "community",
+        "step_by_step_actions": [
+          "Clean the earbud charging case thoroughly using a soft, dry cloth to remove any dust or grime.",
+          "Verify the functionality of the charging case. Ensure it charges properly and holds a charge, and that the earbuds (if available) connect.",
+          "Take clear, well-lit photographs of the charging case from various angles. Highlight its condition and any specific features.",
+          "Choose a suitable online marketplace (e.g., OLX, Quikr, Facebook Marketplace, Cashify for electronics) or a local second-hand electronics store to list your item.",
+          "Create a detailed listing including 'Earbud charging case', 'Plastic' material, 'used' condition, and the price (suggested around 450 INR). Be honest about its condition.",
+          "Communicate with potential buyers, answer questions, and arrange for a safe transaction (pickup or shipping)."
+        ],
+        "tools_required": [
+          "Soft cleaning cloth",
+          "Smartphone or camera for photos",
+          "Internet access / Computer",
+          "Original charging cable (for testing functionality)"
+        ],
+        "estimated_time_minutes": 45
+      },
+      "co2_saved_kg": 2.5,
+      "government_points": 25,
+      "time": "2026-01-11T09:42:15.099717"
+    }
+  ]
+}
